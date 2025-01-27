@@ -42,17 +42,17 @@ public class PurchaseOrderController {
         return ResponseEntity.ok(purchaseOrder);
     }
 
-    // @GetMapping("/employee-details/{employeeId}")
-    // public ResponseEntity<Object> getEmployeeDetails(@PathVariable Long employeeId) {
-    //     Object employeeDetails = service.getEmployeeDetails(employeeId);
-    //     return ResponseEntity.ok(employeeDetails);
-    // }
+    @GetMapping("/employee-details/{employeeId}")
+    public ResponseEntity<Object> getEmployeeDetails(@PathVariable Long employeeId) {
+        Object employeeDetails = service.getEmployeeDetails(employeeId);
+        return ResponseEntity.ok(employeeDetails);
+    }
 
-    // @GetMapping("/project-details/{projectId}")
-    // public ResponseEntity<Object> getProjectDetails(@PathVariable Long projectId) {
-    //     Object projectDetails = service.getProjectDetails(projectId);
-    //     return ResponseEntity.ok(projectDetails);
-    // }
+    @GetMapping("/project-details/{projectId}")
+    public ResponseEntity<Object> getProjectDetails(@PathVariable Long projectId) {
+        Object projectDetails = service.getProjectDetails(projectId);
+        return ResponseEntity.ok(projectDetails);
+    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deletePurchaseOrder(@PathVariable Long id) {
@@ -61,7 +61,7 @@ public class PurchaseOrderController {
     }
 
     @GetMapping("/details/{poId}")
-    public ResponseEntity<Map<String, Object>> getProjectAndEmployeeDetailsByPoId(@PathVariable Long id) {
+    public ResponseEntity<Map<String, Object>> getProjectAndEmployeeDetailsByPoId(@PathVariable ("poId") Long id) {
         Map<String, Object> details = service.getProjectAndEmployeeDetailsByPoId(id);
         if (details == null) {
             return ResponseEntity.notFound().build();
