@@ -32,24 +32,24 @@ public class PurchaseOrderService {
         return repository.findAll();
     }
 
-    public PurchaseOrder getPurchaseOrderById(Long id) {
+    public PurchaseOrder getPurchaseOrderById(String id) {
         return repository.findById(id).orElseThrow(() -> new RuntimeException("Purchase Order not found"));
     }
 
-    public Object getEmployeeDetails(Long employeeId) {
-        return employeeClient.getEmployeeById(employeeId);
+    public Object getEmployeeDetails(Long id) {
+        return employeeClient.getEmployeeById(id);
     }
 
     public Object getProjectDetails(Long projectId) {
         return projectClient.getProjectById(projectId);
     }
 
-    public void deletePurchaseOrder(Long id) {
+    public void deletePurchaseOrder(String id) {
         repository.deleteById(id);
     }
 
-        public Map<String, Object> getProjectAndEmployeeDetailsByPoId(Long poId) {
-        PurchaseOrder purchaseOrder = repository.findById(poId).orElse(null);
+        public Map<String, Object> getProjectAndEmployeeDetailsByPoId(String id) {
+        PurchaseOrder purchaseOrder = repository.findById(id).orElse(null);
         if (purchaseOrder == null) {
             return null;
         }

@@ -37,7 +37,7 @@ public class PurchaseOrderController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PurchaseOrder> getPurchaseOrderById(@PathVariable Long id) {
+    public ResponseEntity<PurchaseOrder> getPurchaseOrderById(@PathVariable String id) {
         PurchaseOrder purchaseOrder = service.getPurchaseOrderById(id);
         return ResponseEntity.ok(purchaseOrder);
     }
@@ -55,13 +55,13 @@ public class PurchaseOrderController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deletePurchaseOrder(@PathVariable Long id) {
+    public ResponseEntity<String> deletePurchaseOrder(@PathVariable String id) {
         service.deletePurchaseOrder(id);
         return ResponseEntity.ok("Purchase Order deleted successfully!");
     }
 
     @GetMapping("/details/{poId}")
-    public ResponseEntity<Map<String, Object>> getProjectAndEmployeeDetailsByPoId(@PathVariable ("poId") Long id) {
+    public ResponseEntity<Map<String, Object>> getProjectAndEmployeeDetailsByPoId(@PathVariable ("poId") String id) {
         Map<String, Object> details = service.getProjectAndEmployeeDetailsByPoId(id);
         if (details == null) {
             return ResponseEntity.notFound().build();

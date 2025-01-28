@@ -1,18 +1,24 @@
 package com.ust.poservice.entity;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+
 
 @Entity
 @Table(name = "purchase_orders")
 public class PurchaseOrder {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  @Id
+    @GeneratedValue(generator = "custom-id-generator")
+    @GenericGenerator(
+            name = "custom-id-generator",
+            strategy = "com.ust.poservice.Generator.CustomIdGenerator"
+    )
+    private String id;
 
     @Column(nullable = false, unique = true)
     private String poNumber;
@@ -43,7 +49,7 @@ public class PurchaseOrder {
     public PurchaseOrder() {
     }
 
-    public PurchaseOrder(Long id, String poNumber, Long projectId, Long employeeId, String fundInterval,
+    public PurchaseOrder(String id, String poNumber, Long projectId, Long employeeId, String fundInterval,
             String bankName, String ifsc, String accountNumber, String status) {
         this.id = id;
         this.poNumber = poNumber;
@@ -56,11 +62,11 @@ public class PurchaseOrder {
         this.status = status;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
